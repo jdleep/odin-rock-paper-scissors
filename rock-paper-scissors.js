@@ -1,6 +1,6 @@
 function getComputerChoice() {
     //Get random number between 0 and 2
-    let random = floor(Math.random()*3);
+    let random = Math.floor(Math.random()*3);
 
     let choice = '';
 
