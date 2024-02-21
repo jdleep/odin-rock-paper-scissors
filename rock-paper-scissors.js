@@ -20,3 +20,20 @@ function getComputerChoice() {
 
     return choice;
 }
+
+function playRound(playerSelection, computerSelection)
+
+    let result = '';
+
+    if (playerSelection.toUpperCase() === 'ROCK') {
+        if
+    } else if (playerSelection.toUpperCase() === 'PAPER') {
+
+    } else {
+
+    }
+}
+
+function createResultStatement(playerSelection, computerSelection, isWin) {
+    isWin ? ""
+}
