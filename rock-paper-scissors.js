@@ -1,5 +1,4 @@
 function getComputerChoice() {
-    // Get random number between 0 and 2
     let random = Math.floor(Math.random()*3);
 
     let choice = '';
@@ -26,27 +25,20 @@ function playRound(playerSelection, computerSelection) {
     // Default round result is "LOSE"
     let roundResult = 'LOSE';
 
+    playerSelection = playerSelection.toUpperCase();
+
     // Player tied with computer
-    if (playerSelection.toUpperCase() === computerSelection.toUpperCase()) {
+    if (playerSelection == computerSelection) {
         roundResult = 'TIE';
         return roundResult;
     }
 
-    if (playerSelection.toUpperCase() === 'ROCK') {
-        // ROCK wins if computer chose SCISSORS
-        if (computerSelection === 'SCISSORS') {
-            roundResult = 'WIN'
-        }
-    } else if (playerSelection.toUpperCase() === 'PAPER') {
-        // PAPER wins if computer chose ROCK
-        if (computerSelection === 'ROCK') {
-            roundResult = 'WIN';
-        }
-    // SCISSORS wins if computer chose PAPER
-    } else {
-        if (computerSelection === 'PAPER') {
-            roundResult = 'WIN'
-        }
+    // TODO: Update this using OR statements.
+    if ((playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
+        (playerSelection === 'PAPER' && computerSelection === 'ROCK') ||
+        (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')
+    ) {
+        roundResult = 'WIN'
     }
 
     return roundResult;
