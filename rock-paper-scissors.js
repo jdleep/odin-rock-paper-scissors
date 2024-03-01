@@ -1,23 +1,8 @@
 function getComputerChoice() {
-    let random = Math.floor(Math.random()*3);
+    let randomNum = Math.floor(Math.random()*3);
 
-    let choice = '';
-
-    switch (random) {
-        case 0:
-            choice = 'ROCK';
-            break;
-        case 1:
-            choice = 'PAPER';
-            break;
-        case 2:
-            choice = 'SCISSORS';
-            break;
-        default:
-            console.error('Random number used for choice outside of 0-2');
-    }
-
-    return choice;
+    let choices = ['ROCK', 'PAPER', 'SCISSORS'];
+    return choices[randomNum];
 }
 
 function playRound(playerChoice, computerChoice) {
@@ -88,7 +73,7 @@ buttonsDiv.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
         let playerChoice = e.target.value;
         let computerChoice = getComputerChoice();
-        
+
         let result = playRound(playerChoice, computerChoice)
         if (result === 'WIN') {
             playerScore.innerText++;
