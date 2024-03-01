@@ -20,23 +20,23 @@ function getComputerChoice() {
     return choice;
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerChoice, computerChoice) {
 
     // Default round result is "LOSE"
     let roundResult = 'LOSE';
 
-    playerSelection = playerSelection.toUpperCase();
+    playerChoice = playerChoice.toUpperCase();
 
     // Player tied with computer
-    if (playerSelection == computerSelection) {
+    if (playerChoice == computerChoice) {
         roundResult = 'TIE';
         return roundResult;
     }
 
     // TODO: Update this using OR statements.
-    if ((playerSelection === 'ROCK' && computerSelection === 'SCISSORS') ||
-        (playerSelection === 'PAPER' && computerSelection === 'ROCK') ||
-        (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')
+    if ((playerChoice === 'ROCK' && computerChoice === 'SCISSORS') ||
+        (playerChoice === 'PAPER' && computerChoice === 'ROCK') ||
+        (playerChoice === 'SCISSORS' && computerChoice === 'PAPER')
     ) {
         roundResult = 'WIN'
     }
@@ -44,22 +44,22 @@ function playRound(playerSelection, computerSelection) {
     return roundResult;
 }
 
-function createResultStatement(playerSelection, computerSelection, roundResult) {
+function createResultStatement(playerChoice, computerChoice, roundResult) {
     let resultStatement = '';
-    playerSelection = capitalize(playerSelection);
-    computerSelection = capitalize(computerSelection);
-    switch(roundResult) {
+    playerChoice = capitalize(playerChoice);
+    computerChoice = capitalize(computerChoice);
+    switch (roundResult) {
         case 'TIE':
             resultStatement = 
-                `You Tie! You both chose ${playerSelection}`;
+                `You Tie! You both chose ${playerChoice}`;
             break;
         case 'WIN':
             resultStatement = 
-                `You Win! ${playerSelection} beats ${computerSelection}`;
+                `You Win! ${playerChoice} beats ${computerChoice}`;
             break;
         case 'LOSE':
             resultStatement =
-            `You Lose! ${computerSelection} beats ${playerSelection}`;
+            `You Lose! ${computerChoice} beats ${playerChoice}`;
             break;
         default:
             console.error('roundResult outside of TIE, WIN, or LOSE given to function');
@@ -73,32 +73,68 @@ function capitalize(s)
     return s && s[0].toUpperCase() + s.slice(1).toLowerCase();
 }
 
-function validateSelection(playerSelection) {
+function validateSelection(playerChoice) {
     const validSelections = new Set(['ROCK', 'PAPER', 'SCISSORS']);
-    let isValid = validSelections.has(playerSelection.toUpperCase());
+    let isValid = validSelections.has(playerChoice.toUpperCase());
     return isValid;
 }
 
+const buttonsDiv = document.querySelector('.buttons');
+let playerScore = document.querySelector('.player-score');
+let computerScore = document.querySelector('.computer-score')
+let resultText = document.querySelector('.result-text')
+
+buttonsDiv.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+        let playerChoice = e.target.value;
+        let computerChoice = getComputerChoice();
+        
+        let result = playRound(playerChoice, computerChoice)
+        if (result === 'WIN') {
+            playerScore.innerText++;
+        } else if (result === 'LOSE') {
+            computerScore.innerText++;
+        }
+        resultText.innerText = createResultStatement(playerChoice, computerChoice, result);
+
+        if (computerScore.innerText >= 5) {
+            resultText.innerText = "YOU LOST THE GAME"
+            playerScore.innerText = 0;
+            computerScore.innerText = 0;
+        }
+
+        if (playerScore.innerText >= 5) {
+            resultText.innerText = "YOU WON THE GAME"
+            playerScore.innerText = 0;
+            computerScore.innerText = 0;
+        }
+    }
+});
+
+
+
+
+/*
 function playGame() {
     let playerScore = 0;
     let computerScore = 0;
-    let playerSelection = '';
-    let computerSelection = '';
+    let playerChoice = '';
+    let computerChoice = '';
     let roundResult = '';
     let roundResultStatement = '';
 
     for (let i = 1; i <= 5; i++) {
-        playerSelection = prompt(`Round ${i}: Please enter "ROCK", "PAPER", or "SCISSORS"`);
+        playerChoice = prompt(`Round ${i}: Please enter "ROCK", "PAPER", or "SCISSORS"`);
 
         // Player canceled
-        if (playerSelection === null) {
+        if (playerChoice === null) {
             console.log('Goodbye!');
             return;
         }
 
-        if (validateSelection(playerSelection)) {
-            computerSelection = getComputerChoice();
-            roundResult = playRound(playerSelection, computerSelection)
+        if (validateSelection(playerChoice)) {
+            computerChoice = getComputerChoice();
+            roundResult = playRound(playerChoice, computerChoice)
             
             if (roundResult === 'WIN') {
                 playerScore++;
@@ -108,7 +144,7 @@ function playGame() {
                 // If tie, nothing happens
             }
             let roundResultStatement = 
-                createResultStatement(playerSelection, computerSelection,
+                createResultStatement(playerChoice, computerChoice,
                     roundResult);
             console.log(`Round ${i}: ${roundResultStatement}`);
         } else {
@@ -125,5 +161,4 @@ function playGame() {
         console.log('You Tied with the Computer!');
     }
 }
-
-playGame();
+*/
