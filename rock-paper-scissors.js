@@ -36,15 +36,15 @@ function createResultStatement(playerChoice, computerChoice, roundResult) {
     switch (roundResult) {
         case 'TIE':
             resultStatement = 
-                `You Tie! You both chose ${playerChoice}`;
+                `YOU TIE THE ROUND! \n\nYou both chose ${playerChoice}`;
             break;
         case 'WIN':
             resultStatement = 
-                `You Win! ${playerChoice} beats ${computerChoice}`;
+                `YOU WIN THE ROUND! \n\n${playerChoice} beats ${computerChoice}`;
             break;
         case 'LOSE':
             resultStatement =
-            `You Lose! ${computerChoice} beats ${playerChoice}`;
+                `YOU LOSE THE ROUND! \n\n${playerChoice} loses to ${computerChoice}`;
             break;
         default:
             console.error('roundResult outside of TIE, WIN, or LOSE given to function');
@@ -58,21 +58,41 @@ function capitalizeFirst(s)
     return s && s[0].toUpperCase() + s.slice(1).toLowerCase();
 }
 
-function validateSelection(playerChoice) {
-    const validSelections = new Set(['ROCK', 'PAPER', 'SCISSORS']);
-    let isValid = validSelections.has(playerChoice.toUpperCase());
-    return isValid;
+function setChoiceImgSrc(img, choice) {
+    const ROCK_IMG_PATH = './images/rock.png';
+    const PAPER_IMG_PATH = './images/paper.png';
+    const SCISSORS_IMG_PATH = './images/scissors.png';
+    const DACHSHUND_IMG_PATH = './images/dachshund.png';
+
+    switch (choice) {
+        case 'ROCK':
+            img.src = ROCK_IMG_PATH;
+            break;
+        case 'PAPER':
+            img.src = PAPER_IMG_PATH;
+            break;
+        case 'SCISSORS':
+            img.src = SCISSORS_IMG_PATH;
+            break;
+        default:
+            img.src = DACHSHUND_IMG_PATH;
+    }
 }
 
 const buttonsDiv = document.querySelector('.buttons');
 let playerScore = document.querySelector('.player-score');
 let computerScore = document.querySelector('.computer-score')
 let resultText = document.querySelector('.result-text')
+let playerChoiceImg = document.querySelector('.player-choice-image');
+let computerChoiceImg = document.querySelector('.computer-choice-image');
 
 buttonsDiv.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
         let playerChoice = e.target.value;
         let computerChoice = getComputerChoice();
+
+        setChoiceImgSrc(playerChoiceImg, playerChoice);
+        setChoiceImgSrc(computerChoiceImg, computerChoice);
 
         let result = playRound(playerChoice, computerChoice)
         if (result === 'WIN') {
@@ -86,64 +106,16 @@ buttonsDiv.addEventListener('click', (e) => {
             resultText.innerText = "YOU LOST THE GAME"
             playerScore.innerText = 0;
             computerScore.innerText = 0;
+            setChoiceImgSrc(playerChoiceImg, 'DACHSHUND');
+            setChoiceImgSrc(computerChoiceImg, 'DACHSHUND');
         }
 
         if (playerScore.innerText >= 5) {
             resultText.innerText = "YOU WON THE GAME"
             playerScore.innerText = 0;
             computerScore.innerText = 0;
+            setChoiceImgSrc(playerChoiceImg, 'DACHSHUND');
+            setChoiceImgSrc(computerChoiceImg, 'DACHSHUND');
         }
     }
 });
-
-
-
-
-/*
-function playGame() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let playerChoice = '';
-    let computerChoice = '';
-    let roundResult = '';
-    let roundResultStatement = '';
-
-    for (let i = 1; i <= 5; i++) {
-        playerChoice = prompt(`Round ${i}: Please enter "ROCK", "PAPER", or "SCISSORS"`);
-
-        // Player canceled
-        if (playerChoice === null) {
-            console.log('Goodbye!');
-            return;
-        }
-
-        if (validateSelection(playerChoice)) {
-            computerChoice = getComputerChoice();
-            roundResult = playRound(playerChoice, computerChoice)
-            
-            if (roundResult === 'WIN') {
-                playerScore++;
-            } else if (roundResult == 'LOSE') {
-                computerScore++;
-            } else {
-                // If tie, nothing happens
-            }
-            let roundResultStatement = 
-                createResultStatement(playerChoice, computerChoice,
-                    roundResult);
-            console.log(`Round ${i}: ${roundResultStatement}`);
-        } else {
-            computerScore++;
-            console.log('Incorrect value! You lose!')
-        }
-    }
-
-    if (computerScore > playerScore) {
-        console.log(`You Lost the Game! Computer: ${computerScore}, Player: ${playerScore}`);
-    } else if (playerScore > computerScore) {
-        console.log(`You Won the Game! Computer: ${computerScore}, Player: ${playerScore}`);
-    } else {
-        console.log('You Tied with the Computer!');
-    }
-}
-*/
