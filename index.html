@@ -3,19 +3,43 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
-        <script src="rock-paper-scissors.js" defer></script>
+        <script src="./rock-paper-scissors.js" defer></script>
+        <link rel="stylesheet" href="./style.css"> 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Special+Elite&display=swap" rel="stylesheet">
     </head>
 
     <body>
+        <div class="hero">
+            <h1 class="hero-header">Rock Paper Scissors</h1>
+            <p class="hero-text">Can you beat the computer?</p>
+        </div>
+        <div class="choices-container">
+            <div class="player-choice">
+                <h2>Player Choice:</h2>
+            </div>
+            <div class="computer-choice">
+                <h2>Computer Choice:</h2>
+            </div>
+        </div>
+        <div class="results-container"></div>
+            <p class="result-text">The computer is READY!</p>
+        </div>
+        <div class="scores-container">
+            <div class="player-score-container">
+                <h2>Player</h2>
+                <p class="player-score">0</p>
+            </div>
+            <div class="computer-score-container">
+                <h2>Computer</h2>
+                <p class="computer-score">0</p>
+            </div>
+        </div>
         <div class="buttons">
             <button type="button" value="ROCK" class="rock">Rock</button>
             <button type="button" value="SCISSORS" class="scissors">Scissors</button>
             <button type="button" value="PAPER" class="paper">Paper</button>
         </div>
     </body>
-    <div class="result-text"></div>
-    <div class="scores">
-        <div class="player-score">0</div>
-        <div class="computer-score">0</div>
-    </div>
 </html>
