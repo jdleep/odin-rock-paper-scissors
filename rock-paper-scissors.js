@@ -31,8 +31,8 @@ function playRound(playerChoice, computerChoice) {
 
 function createResultStatement(playerChoice, computerChoice, roundResult) {
     let resultStatement = '';
-    playerChoice = capitalize(playerChoice);
-    computerChoice = capitalize(computerChoice);
+    playerChoice = capitalizeFirst(playerChoice);
+    computerChoice = capitalizeFirst(computerChoice);
     switch (roundResult) {
         case 'TIE':
             resultStatement = 
@@ -53,7 +53,7 @@ function createResultStatement(playerChoice, computerChoice, roundResult) {
     return resultStatement;
 }
 
-function capitalize(s)
+function capitalizeFirst(s)
 {
     return s && s[0].toUpperCase() + s.slice(1).toLowerCase();
 }
