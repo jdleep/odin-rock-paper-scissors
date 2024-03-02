@@ -5,6 +5,9 @@
 body {
     display: flex;
     flex-direction: column;
+    margin: 0;
+    height: 100vh;
+    /* align-items: space-between; */
     /* align-items: center; */
 }
 
@@ -40,6 +43,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    padding: 3px;
 }
 
 .choice > h2 {
@@ -94,6 +98,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    /* margin-bottom: auto; */
 }
 
 .choice-button {
@@ -118,4 +123,16 @@ body {
     height: 100%;
     object-fit: contain;
     z-index: -1;
+}
+
+.footer {
+    margin-top: auto;
+    height: 50px;
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    /* justify-self: end; */
 }
